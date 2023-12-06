@@ -5,7 +5,7 @@ import java.io.InputStream
 
 fun main() {
     val solver = Dec05()
-    solver.partOne()
+   // solver.partOne()
     solver.partTwo()
 }
 
