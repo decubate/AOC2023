@@ -17,7 +17,6 @@ class Dec04 {
             it.toCard()
         }.fold(0.0) { acc, card -> acc + card.value() }
 
-
         println(cards)
     }
 
@@ -25,8 +24,6 @@ class Dec04 {
     fun partTwo() {
         val lines = getLines()
         val allCards = mutableListOf<Card>()
-        val map = mutableMapOf<Card, Int>()
-        val cardMap = mutableMapOf<Card, List<Card>>()
 
         val originalCards = lines.map {
             it.toCard()
@@ -40,18 +37,6 @@ class Dec04 {
         }
 
         println(allCards.size + originalCards.size)
-    }
-
-    fun doThing(originalCards: List<Card>) {
-        val list = mutableListOf<Card>()
-        list.addAll(originalCards)
-        val finalList = mutableListOf<Card>()
-        for (card in originalCards) {
-            val index = originalCards.indexOf(card)
-            finalList.addAll(card.allCards(originalCards, index))
-        }
-
-        println(finalList.size + originalCards.size)
     }
 
     data class Card(val name: String, val winningNumbers: List<Int>, val numbers: List<Int>) {

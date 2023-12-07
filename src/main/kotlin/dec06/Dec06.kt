@@ -21,7 +21,7 @@ class Dec06 {
         val races = mutableListOf<Race>()
         val times = lines[0].split(Regex("\\s+")).drop(1).map { it.toLong() }
         val distances = lines[1].split(Regex("\\s+")).drop(1).map { it.toLong() }
-        
+
         for (i in times.indices) {
             races.add(Race(times[i], distances[i]))
         }
