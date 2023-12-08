@@ -1,7 +1,6 @@
 package dec01
 
-import java.io.File
-import java.io.InputStream
+import getLines
 
 fun main() {
     val solver = Dec01()
@@ -11,7 +10,7 @@ fun main() {
 
 class Dec01 {
     fun partOne() {
-        val sum = getLines()
+        val sum = getLines("dec01")
             .map { it.toCharArray().filter { it.isDigit() } }
             .map { "${it.first()}${it.last()}" }
             .map { it.toInt() }
@@ -21,8 +20,7 @@ class Dec01 {
     }
 
     fun partTwo() {
-        val now = System.currentTimeMillis()
-        println(getLines()
+        println(getLines("dec01")
             .map { it.getDigits() }
             .map { digits ->
                 digits.map {
@@ -50,17 +48,6 @@ class Dec01 {
                 int + acc
             }
         )
-        println(System.currentTimeMillis() - now)
-    }
-
-    private fun getLines(): MutableList<String> {
-        val file = File("src/main/kotlin/dec01/input.txt")
-        println(file.absolutePath)
-        val inputStream: InputStream = file.inputStream()
-        val lineList = mutableListOf<String>()
-
-        inputStream.bufferedReader().forEachLine { lineList.add(it) }
-        return lineList
     }
 
     private fun String.getDigits(): List<String> {

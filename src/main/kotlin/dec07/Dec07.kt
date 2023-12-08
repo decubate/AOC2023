@@ -1,7 +1,6 @@
 package dec07
 
-import java.io.File
-import java.io.InputStream
+import getLines
 
 fun main() {
     val solver = Dec07()
@@ -12,7 +11,7 @@ fun main() {
 class Dec07 {
 
     fun partOne() {
-        val value = getLines().map {
+        val value = getLines("dec07").map {
             val parts = it.split(" ")
             Hand(parts[0].toCharArray().asList(), parts[1].toLong())
         }.sortedWith(HandSorter(false)).mapIndexed { index, hand ->
@@ -25,7 +24,7 @@ class Dec07 {
     }
 
     fun partTwo() {
-        val value = getLines().map {
+        val value = getLines("dec07").map {
             val parts = it.split(" ")
             Hand(parts[0].toCharArray().asList(), parts[1].toLong())
         }.sortedWith(HandSorter(jokerRule = true)).mapIndexed { index, hand ->
@@ -159,15 +158,5 @@ class Dec07 {
         TWO_PAIR,
         ONE_PAIR,
         HIGH_CARD
-    }
-
-    private fun getLines(): MutableList<String> {
-        val file = File("src/main/kotlin/dec07/input.txt")
-        println(file.absolutePath)
-        val inputStream: InputStream = file.inputStream()
-        val lineList = mutableListOf<String>()
-
-        inputStream.bufferedReader().forEachLine { lineList.add(it) }
-        return lineList
     }
 }

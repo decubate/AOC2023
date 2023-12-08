@@ -1,7 +1,6 @@
 package dec08
 
-import java.io.File
-import java.io.InputStream
+import getLines
 
 fun main() {
     val solver = Dec08()
@@ -12,7 +11,7 @@ fun main() {
 class Dec08 {
 
     fun partOne() {
-        val lines = getLines()
+        val lines = getLines("dec08")
         val instructions = lines[0].toCharArray()
         val regex = Regex("([A-Z]{3}) = \\(([A-Z]{3}), ([A-Z]{3})\\)")
         val nodes = lines.drop(2).map { line ->
@@ -53,7 +52,7 @@ class Dec08 {
     }
 
     fun partTwo() {
-        val lines = getLines()
+        val lines = getLines("dec08")
         val instructions = lines[0].toCharArray()
         val regex = Regex("([A-Z]{3}) = \\(([A-Z]{3}), ([A-Z]{3})\\)")
         val nodes = lines.drop(2).map { line ->
@@ -90,15 +89,5 @@ class Dec08 {
         }
 
         return maxLcm
-    }
-
-    private fun getLines(): MutableList<String> {
-        val file = File("src/main/kotlin/dec08/input.txt")
-        println(file.absolutePath)
-        val inputStream: InputStream = file.inputStream()
-        val lineList = mutableListOf<String>()
-
-        inputStream.bufferedReader().forEachLine { lineList.add(it) }
-        return lineList
     }
 }

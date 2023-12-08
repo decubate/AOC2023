@@ -1,8 +1,6 @@
 package dec03
 
-import java.io.File
-import java.io.InputStream
-import java.lang.NumberFormatException
+import getLines
 
 fun main() {
     val solver = Dec03()
@@ -11,9 +9,8 @@ fun main() {
 }
 
 class Dec03 {
-
     fun partOne() {
-        val lines = getLines()
+        val lines = getLines("dec03")
         val matrix: List<CharArray> = lines.map { it.toCharArray() }
         val partNumbers = getPartNumbers(lines)
             .filter { it.hasSymbolNeighbor(matrix) }
@@ -44,7 +41,7 @@ class Dec03 {
         }.also { println("${it.size} parts") }
 
     fun partTwo() {
-        val lines = getLines()
+        val lines = getLines("dec03")
 
         val partNumbers = getPartNumbers(lines)
         println(partNumbers)
@@ -59,11 +56,9 @@ class Dec03 {
                 for (c in column - 1 .. column + 1) {
                     val elements =
                         partNumbers.filter { it.contains(r, c) }
-                    // println("checking $r $c, got $elements")
                     neighbors.addAll(elements)
                 }
             }
-            // println("neighbors for $this: $neighbors")
             return if (neighbors.size == 2) neighbors.fold(1) { acc, neighbor -> acc * neighbor.value } else 0
         }
     }
@@ -96,29 +91,18 @@ class Dec03 {
         }
 
         private fun List<CharArray>.hasSymbol(row: Int, column: Int): Boolean {
-            try {
+            return try {
                 val c = this[row][column]
                 val b = !c.isDigit() && c != '.'
-                return b
+                b
             } catch (e: IndexOutOfBoundsException) {
-                return false
+                false
             }
         }
 
         fun contains(row: Int, column: Int): Boolean {
             return this.row == row && startIndex <= column && endIndex > column
         }
-    }
-
-
-    private fun getLines(): MutableList<String> {
-        val file = File("src/main/kotlin/dec03/input.txt")
-        println(file.absolutePath)
-        val inputStream: InputStream = file.inputStream()
-        val lineList = mutableListOf<String>()
-
-        inputStream.bufferedReader().forEachLine { lineList.add(it) }
-        return lineList
     }
 
     data class StringWithIndices(val value: String, val startIndex: Int, val endIndex: Int)

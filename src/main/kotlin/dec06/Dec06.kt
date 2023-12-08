@@ -1,7 +1,6 @@
 package dec06
 
-import java.io.File
-import java.io.InputStream
+import getLines
 
 fun main() {
     val solver = Dec06()
@@ -12,7 +11,7 @@ fun main() {
 class Dec06 {
 
     fun partOne() {
-        val lines = getLines()
+        val lines = getLines("dec06")
         val races = getRaces(lines)
         println(races.fold(1) { acc, race -> acc * race.getNumWaysToWin() })
     }
@@ -30,7 +29,7 @@ class Dec06 {
 
 
     fun partTwo() {
-        val lines = getLines()
+        val lines = getLines("dec06")
         val time = lines[0].split(Regex("\\s+")).drop(1).fold("") { acc, part -> acc + part }.toLong()
         val distance = lines[1].split(Regex("\\s+")).drop(1).fold("") { acc, part -> acc + part }.toLong()
         val race = Race(time, distance)
@@ -47,15 +46,5 @@ class Dec06 {
             }
             return numWays
         }
-    }
-
-    private fun getLines(): MutableList<String> {
-        val file = File("src/main/kotlin/dec06/input.txt")
-        println(file.absolutePath)
-        val inputStream: InputStream = file.inputStream()
-        val lineList = mutableListOf<String>()
-
-        inputStream.bufferedReader().forEachLine { lineList.add(it) }
-        return lineList
     }
 }

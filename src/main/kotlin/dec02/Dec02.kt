@@ -1,7 +1,6 @@
 package dec02
 
-import java.io.File
-import java.io.InputStream
+import getLines
 
 fun main() {
     val solver = Dec02()
@@ -12,12 +11,12 @@ fun main() {
 class Dec02 {
 
     fun partOne() {
-        val lines = getLines()
+        val lines = getLines("dec02")
         println(getPossibleGames(lines).sum())
     }
 
     fun partTwo() {
-        val lines = getLines()
+        val lines = getLines("dec02")
         println(getMaxGames(lines).map {
             val valueForColor = it.value
             println(valueForColor)
@@ -63,21 +62,9 @@ class Dec02 {
 
         return mapOf("blue" to maxBlue, "red" to maxRed, "green" to maxGreen).also { println(it) }
     }
-
-    private fun getLines(): MutableList<String> {
-        val file = File("src/main/kotlin/dec02/input.txt")
-        println(file.absolutePath)
-        val inputStream: InputStream = file.inputStream()
-        val lineList = mutableListOf<String>()
-
-        inputStream.bufferedReader().forEachLine { lineList.add(it) }
-        return lineList
-    }
-
 }
 
 private fun Map<String, Int>.isPossibleGame(): Boolean {
-
     val b = this["blue"]!! <= 14
     return b && this["red"]!! <= 12 && this["green"]!! <= 13
 }

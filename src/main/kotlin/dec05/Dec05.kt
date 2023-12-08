@@ -1,18 +1,17 @@
 package dec05
 
-import java.io.File
-import java.io.InputStream
+import getLines
 
 fun main() {
     val solver = Dec05()
-   // solver.partOne()
+    solver.partOne()
     solver.partTwo()
 }
 
 class Dec05 {
 
     fun partOne() {
-        val lines = getLines()
+        val lines = getLines("dec05")
         val seeds = mutableListOf<Long>()
         val maps = mutableMapOf<GardeningType, List<Range>>()
         var type: GardeningType? = null
@@ -65,7 +64,7 @@ class Dec05 {
 
 
     fun partTwo() {
-        val lines = getLines()
+        val lines = getLines("dec05")
         val seeds = mutableListOf<LongRange>()
         val maps = mutableMapOf<GardeningType, List<Range>>()
         var type: GardeningType? = null
@@ -157,15 +156,5 @@ class Dec05 {
                 -1
             }
         }
-    }
-
-    private fun getLines(): MutableList<String> {
-        val file = File("src/main/kotlin/dec05/input.txt")
-        println(file.absolutePath)
-        val inputStream: InputStream = file.inputStream()
-        val lineList = mutableListOf<String>()
-
-        inputStream.bufferedReader().forEachLine { lineList.add(it) }
-        return lineList
     }
 }
